@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.1.5'
+	id 'io.spring.dependency-management' version '1.1.3'
+	id 'org.hibernate.orm' version '6.2.13.Final'
+	id 'org.graalvm.buildtools.native' version '0.9.27'
+}
+
+group = 'com.robin'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok:1.18.22'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+	// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+	implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '12.4.1.jre8'
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-cache
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '3.1.2'
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '3.1.4'
+
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+hibernate {
+	enhancement {
+		enableAssociationManagement = true
+	}
+}
+
